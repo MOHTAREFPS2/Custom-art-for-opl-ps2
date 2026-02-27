@@ -369,7 +369,7 @@
         resetProcessState();
     }
 
-    async function startProcessing() {
+        async function startProcessing() {
         const gameId = gameIdInput.value.trim();
         if (Object.keys(selectedFiles).length === 0) { alert("اختر صورة واحدة على الأقل!"); return; }
         if (!gameId) { alert("أدخل ايدي اللعبة أولاً!"); return; }
@@ -383,19 +383,27 @@
         for (const suffix in selectedFiles) {
             const file = selectedFiles[suffix];
             const config = ART_CONFIG[suffix];
-            const infoDiv = document.getElementById(`info-${suffix}`);
             
             try {
                 const resizedBlob = await processImageOnCanvas(file, config, autoCrop);
                 zip.file(`${gameId}${suffix}.${config.format}`, resizedBlob);
-                infoDiv.style.display = 'block';
-                infoDiv.innerHTML = `<i class="fas fa-check"></i> تمت المعالجة بنجاح.`;
-                infoDiv.className = 'info-box ideal';
+                // تم إزالة أكواد رسالة "تمت المعالجة بنجاح" الفردية من هنا
             } catch (error) {
-                infoDiv.style.display = 'block';
-                infoDiv.innerHTML = `<i class="fas fa-times"></i> فشل المعالجة.`;
+                console.error(`خطأ في معالجة الصورة: ${suffix}`, error);
             }
         }
+
+        processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> تجميع الملف...';
+        try {
+            finalZipBlob = await zip.generateAsync({ type: "blob", compression: "STORE" });
+            downloadZipBtn.style.display = 'inline-block';
+            processBtn.style.display = 'none';
+        } catch (error) {
+            alert('حدث خطأ أثناء الإنشاء.');
+            resetProcessState();
+        }
+    }
+
 
         processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> تجميع الملف...';
         try {
