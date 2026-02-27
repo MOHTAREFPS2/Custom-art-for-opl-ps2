@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع محترف PS2 لتخصيص صور الألعاب</title>
+    <meta name="description" content="أداة احترافية لإنشاء وتخصيص صور أغلفة وخلفيات ألعاب بلاي ستيشن 2 لنظام OPL بسهولة وسرعة.">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA..." type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1><i class="fas fa-palette"></i> موقع <b class="highlight">محترف PS2</b><br> لتخصيص صور الألعاب</h1>
+    </header>
+    
+    <main>
+        <div class="card card-links">
+            <h2>❤️ تابعنا وكن على تواصل معنا ✅</h2>
+            <ul>
+                <li><a href="https://youtube.com/@mohtaref_ps2" target="_blank"><i class="fab fa-youtube"></i>قناة اليوتيوب</a></li>
+                <li><a href="https://t.me/mohtaref_ps2_1" target="_blank"><i class="fab fa-telegram"></i>قناة التليجرام</a></li>
+                <li><a href="https://t.me/mohtaref_ps2_2" target="_blank"><i class="fas fa-users"></i>منتدى المتابعين</a></li>
+                <li><a href="https://www.tiktok.com/@mohtaref_ps2" target="_blank"><i class="fab fa-tiktok"></i>قناة التيك توك</a></li>
+                <li><a href="#" target="_blank" class="colored-link" title="الشرح قريباً!"><i class="fas fa-video"></i>شاهد الشرح</a></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-info-circle"></i> ملاحظة هامة حول أبعاد الصور</h2>
+            <p>لضمان ظهور الصور بشكل مثالي في نظام OPL وعدم ظهورها "مجعوصة" أو مشوهة، يجب أن تكون نسبة الطول إلى العرض مطابقة للنسبة المطلوبة في كل خانة. يتم حساب النسبة بقسمة العرض على الطول.</p>
+            
+            <div class="toggle-container">
+                <label class="switch">
+                    <input type="checkbox" id="auto-crop-toggle">
+                    <div class="slider round"></div>
+                </label>
+                <div class="toggle-text">
+                    <b>قص الأبعاد تلقائياً لضمان صورة سليمة</b>
+                    <p class="toggle-desc">عند التفعيل، سيقوم الموقع بقص الأجزاء الزائدة من المنتصف لضمان عدم تشوه الصورة (قد يتم قص أجزاء مرغوبة). عند التعطيل، سيتم ضغط الصورة لتناسب الأبعاد (قد تبدو مجعوصة).</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="input-section">
+                <label for="gameId"><i class="fas fa-id-card"></i> الخطوة الأولى: ضع ايدي اللعبة</label>
+                <input type="text" id="gameId" placeholder="مثال: SLES_556.05">
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-images"></i> الخطوة الثانية: اختر الصور أو اسحبها هنا</h2>
+            <div class="art-grid" id="artGrid">
+                </div>
+            <div class="action-container">
+                <button id="process-btn" class="action-button" disabled><i class="fas fa-cogs"></i> بدء المعالجة وإنشاء ملف ZIP</button>
+                <button id="download-zip-btn" class="action-button"><i class="fas fa-download"></i> تحميل ملف الـ ZIP</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; <b id="year"></b> محترف PS2. جميع الحقوق محفوظة.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
