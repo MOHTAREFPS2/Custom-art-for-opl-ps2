@@ -22,36 +22,29 @@
     
     <main>
         <div class="card card-links">
-            <h2>❤️ تابعنا وكن على تواصل معنا ✅</h2>
             <ul>
-                <li><a href="https://youtube.com/@mohtaref_ps2" target="_blank"><i class="fab fa-youtube"></i>قناة اليوتيوب</a></li>
-                <li><a href="https://t.me/mohtaref_ps2_1" target="_blank"><i class="fab fa-telegram"></i>قناة التليجرام</a></li>
-                <li><a href="https://t.me/mohtaref_ps2_2" target="_blank"><i class="fas fa-users"></i>منتدى المتابعين</a></li>
-                <li><a href="https://www.tiktok.com/@mohtaref_ps2" target="_blank"><i class="fab fa-tiktok"></i>قناة التيك توك</a></li>
-                <li><a href="#" target="_blank" class="colored-link" title="الشرح قريباً!"><i class="fas fa-video"></i>شاهد الشرح</a></li>
+                <li><a href="https://youtube.com/@mohtaref_ps2" target="_blank"><i class="fab fa-youtube"></i>يوتيوب</a></li>
+                <li><a href="https://t.me/mohtaref_ps2_1" target="_blank"><i class="fab fa-telegram"></i>تليجرام</a></li>
+                <li><a href="https://t.me/mohtaref_ps2_2" target="_blank"><i class="fas fa-users"></i>المنتدى</a></li>
+                <li><a href="https://www.tiktok.com/@mohtaref_ps2" target="_blank"><i class="fab fa-tiktok"></i>تيك توك</a></li>
             </ul>
         </div>
 
         <div class="card">
-            <h2><i class="fas fa-info-circle"></i> ملاحظة هامة حول أبعاد الصور</h2>
-            <p>لضمان ظهور الصور بشكل مثالي في نظام OPL وعدم ظهورها "مجعوصة" أو مشوهة، يجب أن تكون نسبة الطول إلى العرض مطابقة للنسبة المطلوبة في كل خانة. يتم حساب النسبة بقسمة العرض على الطول.</p>
-            
+            <div class="input-section">
+                <label for="gameId"><i class="fas fa-id-card"></i> الخطوة الأولى: ضع ايدي اللعبة</label>
+                <input type="text" id="gameId" placeholder="مثال: SLES_556.05">
+            </div>
+
             <div class="toggle-container">
                 <label class="switch">
-                    <input type="checkbox" id="auto-crop-toggle">
+                    <input type="checkbox" id="auto-crop-toggle" checked>
                     <div class="slider round"></div>
                 </label>
                 <div class="toggle-text">
                     <b>قص الأبعاد تلقائياً لضمان صورة سليمة</b>
-                    <p class="toggle-desc">عند التفعيل، سيقوم الموقع بقص الأجزاء الزائدة من المنتصف لضمان عدم تشوه الصورة (قد يتم قص أجزاء مرغوبة). عند التعطيل، سيتم ضغط الصورة لتناسب الأبعاد (قد تبدو مجعوصة).</p>
+                    <p class="toggle-desc">إذا تم التفعيل: سيتم قص الصورة من المنتصف لأفضل نتيجة (قد يتم فقدان أطراف الصورة).<br>إذا تم التعطيل: سيتم ضغط الصورة لتناسب الأبعاد (قد تبدو مشوهة).</p>
                 </div>
-            </div>
-        </div>
-        
-        <div class="card">
-            <div class="input-section">
-                <label for="gameId"><i class="fas fa-id-card"></i> الخطوة الأولى: ضع ايدي اللعبة</label>
-                <input type="text" id="gameId" placeholder="مثال: SLES_556.05">
             </div>
         </div>
         
