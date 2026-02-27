@@ -5,13 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع محترف PS2 لتخصيص صور الألعاب</title>
     <meta name="description" content="أداة احترافية لإنشاء وتخصيص صور أغلفة وخلفيات ألعاب بلاي ستيشن 2 لنظام OPL بسهولة وسرعة.">
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA..." type="image/png">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGpSURBVDhPpZJNKwRhFIW/ewd5C3kk3sghkkcQx8uH5AWy8kbyAhk/gZ/A5g1k5T1I5Yk8d4+ZM7O7d3d2Z5Z7d5nZ2Z3z/c6553A6HQQhQJVKxUNisdit8Xj8s2ia5o9EIrGys7OzjYyMjAIDAwOF8+bN+4uLi1+cnZ39w+CysrIqKysr+w2b1+/s7PwsLCx8MjQ09Dwej1/I5/Ov0WjU0+l0mUwmoVLpNo/H+5+BgYEfFRXVLzY2NnJ5eXkeCATg5+eHDoeDFosF+v0+vF4v8vl8QWAiEvEcDodfsVh8zmazE4VCAfR6PaLRKPl8PhqNBrIsC4vFgo2NDczMzODn54d0O0uXy4VSqURzc3O1l5fXb6ampm5ubm4ODg6+jI+Pf5DP538ul4vVajXhcDiVSqWMzWb7x8fHD6GhoX2pVMpgMPhbKBR6gUDgB4FA4CSTyQQ6nc58Pp9sNpsYjUY6nc7FYrGYy+U6i4uLbW1tbUZGRv4P+v1+gUCAy+VCrVbDbrf7hMNhI5FItFotGwwGHR4e/gNZp4z/OMiYJAAAAABJRU5ErkJggg==" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <style>
+        :root {
+            --background-color: #0e0e0e;
+            --card-color: #1e1e1e;
+            --primary-text: #e0e0e0;
+            --highlight-red: #e53935;
+            --accent-blue: #4fc3f7;
+            --button-blue: #2196f3;
+            --button-blue-hover: #1976d2;
+            --success-green: #4CAF50;
+            --warning-yellow: #ffb300;
+            --danger-red: #EF4444;
+            --dark-gray: #2c2c2c;
+            --border-color: #444;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--background-color);
+            color: var(--primary-text);
+            margin: 0; padding: 20px 10px;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; box-sizing: border-box;
+        }
+
+        .container { width: 100%; max-width: 1000px; }
+
+        header h1 { margin: 10px 0 20px 0; text-align: center; font-size: 2rem; }
+        header .highlight { color: var(--highlight-red); }
+
+        .card {
+            background-color: var(--card-color); border-radius: 12px;
+            padding: 20px; margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color); box-sizing: border-box;
+        }
+
+        h2 { text-align: center; font-size: 1.3rem; margin: 0 0 20px 0; }
+
+        .card-links ul {
+            list-style-type: none; padding: 0; display: flex;
+            flex-wrap: wrap; justify-content: center; gap: 20px; margin: 0;
+        }
+        .card-links a {
+            color: var(--accent-blue); text-decoration: none; font-weight: 500;
+        }
+
+        .input-section label {
+            display: block; text-align: center; font-weight: 700;
+            font-size: 1.2rem; margin-bottom: 10px;
+        }
+.input-section input[type="text"] {
+    display: block; 
+    margin: 0 auto 15px auto; 
+    background-color: var(--dark-gray);
+    border: 1px solid #555; 
+    padding: 12px; 
+    border-radius: 8px;
+    color: white; 
+    width: 100%; 
+    max-width: 400px; 
+    text-align: center;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+}
+        .input-section input[type="text"]:focus {
+            outline: none; border-color: var(--accent-blue);
+        }
+
+        .toggle-container {
+            display: flex; align-items: center; justify-content: center;
+            gap: 15px; background: #222; padding: 15px;
+            border-radius: 8px; border: 1px solid #333; max-width: 600px; margin: 0 auto;
+        }
+        .toggle-text b { color: var(--accent-blue); font-size: 1rem; }
+        .toggle-desc { margin: 5px 0 0 0; font-size: 0.85rem; color: #999; }
+
+        .switch { position: relative; display: inline-block; width: 50px; height: 28px; flex-shrink: 0; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #555; transition: .4s; border-radius: 28px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 20px; width: 20px;
+            left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--success-green); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        .art-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;
+        }
+        .art-box {
+            background-color: #252528; padding: 15px; border-radius: 10px;
+            border: 2px dashed #444; display: flex; flex-direction: column;
+            align-items: center; text-align: center; position: relative;
+            transition: 0.2s;
+        }
+        .art-box.dragover { border-color: var(--accent-blue); background-color: #2c2c30; }
+
+        .opl-placement-img {
+            width: 100%; max-height: 100px; object-fit: contain; margin-bottom: 10px;
+            border-radius: 6px; background: #111; padding: 5px; border: 1px solid #333;
+        }
+        .art-box h3 { margin: 0 0 15px 0; color: var(--accent-blue); font-size: 1.1rem; }
+
+        .file-upload-label {
+            padding: 8px 15px; background-color: var(--button-blue);
+            color: white; border-radius: 6px; cursor: pointer; font-size: 0.9rem;
+        }
+        .file-upload-label:hover { background-color: var(--button-blue-hover); }
+        .file-upload-input { display: none; }
+
+        .preview-area { display: none; flex-direction: column; align-items: center; width: 100%; }
+        .preview-img { max-width: 100%; max-height: 140px; border-radius: 6px; margin-bottom: 10px; border: 1px solid #555; }
+        .clear-btn {
+            position: absolute; top: 10px; left: 10px; background: rgba(239, 68, 68, 0.8);
+            color: white; border: none; border-radius: 4px; width: 25px; height: 25px;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+        }
+        .clear-btn:hover { background: var(--danger-red); }
+
+        .info-box {
+            width: 100%; text-align: right; padding: 10px; box-sizing: border-box;
+            border-radius: 6px; font-size: 0.85rem; margin-top: 10px; line-height: 1.5;
+            background: #1e1e1e; border-right: 3px solid #555; display: none;
+        }
+        .info-box.ideal { border-right-color: var(--success-green); background: rgba(76, 175, 80, 0.1); }
+        .info-box.warn { border-right-color: var(--warning-yellow); background: rgba(255, 179, 0, 0.1); }
+        .info-box b { color: white; }
+
+        .action-container { text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+        .action-button {
+            color: white; border: none; padding: 12px 25px; font-size: 1.1rem;
+            font-weight: 700; font-family: 'Tajawal', sans-serif; border-radius: 8px;
+            cursor: pointer; transition: 0.2s;
+        }
+        .action-button:disabled { background-color: #555 !important; opacity: 0.6; cursor: not-allowed; }
+        #process-btn { background-color: var(--button-blue); }
+        #process-btn:hover:not(:disabled) { background-color: var(--button-blue-hover); }
+        #download-zip-btn { background-color: var(--success-green); display: none; }
+        #download-zip-btn:hover { background-color: #388E3C; }
+
+        footer { padding: 20px; text-align: center; font-size: 0.9rem; color: #777; }
+        
+        @media (max-width: 768px) {
+            .toggle-container { flex-direction: column; text-align: center; }
+            .art-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
@@ -25,7 +176,7 @@
             <ul>
                 <li><a href="https://youtube.com/@mohtaref_ps2" target="_blank"><i class="fab fa-youtube"></i>يوتيوب</a></li>
                 <li><a href="https://t.me/mohtaref_ps2_1" target="_blank"><i class="fab fa-telegram"></i>تليجرام</a></li>
-                <li><a href="https://t.me/mohtaref_ps2_2" target="_blank"><i class="fas fa-users"></i>المنتدى</a></li>
+                <li><a href="https://t.me/mohtaref_ps2_3" target="_blank"><i class="fas fa-users"></i>المنتدى</a></li>
                 <li><a href="https://www.tiktok.com/@mohtaref_ps2" target="_blank"><i class="fab fa-tiktok"></i>تيك توك</a></li>
             </ul>
         </div>
@@ -43,13 +194,13 @@
                 </label>
                 <div class="toggle-text">
                     <b>قص الأبعاد تلقائياً لضمان صورة سليمة</b>
-                    <p class="toggle-desc">إذا تم التفعيل: سيتم قص الصورة من المنتصف لأفضل نتيجة (قد يتم فقدان أطراف الصورة).<br>إذا تم التعطيل: سيتم ضغط الصورة لتناسب الأبعاد (قد تبدو مشوهة).</p>
+                    <p class="toggle-desc">✅تفعيل: اقتصاص تلقائي لأفضل نتيجة. <br> ℹ️تعطيل: ضغط الصورة لأبعاد OPL.</p>
                 </div>
             </div>
         </div>
         
         <div class="card">
-            <h2><i class="fas fa-images"></i> الخطوة الثانية: اختر الصور أو اسحبها هنا</h2>
+            <h2><i class="fas fa-images"></i> الخطوة الثانية: <br> اختر الصور أو اسحبها هنا</h2>
             <div class="art-grid" id="artGrid">
                 </div>
             <div class="action-container">
@@ -64,6 +215,260 @@
     <p>&copy; <b id="year"></b> محترف PS2. جميع الحقوق محفوظة.</p>
 </footer>
 
-<script src="script.js"></script>
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const artGrid = document.getElementById('artGrid');
+    const gameIdInput = document.getElementById('gameId');
+    const processBtn = document.getElementById('process-btn');
+    const downloadZipBtn = document.getElementById('download-zip-btn');
+    const autoCropToggle = document.getElementById('auto-crop-toggle');
+
+    let selectedFiles = {}; 
+    let finalZipBlob = null; 
+
+    // مسارات الصور التوضيحية أصبحت محلية (قم برفعها مع ملف الـ html في نفس المجلد)
+    const ART_CONFIG = {
+    _COV:  { title: "Cover",       width: 140, height: 200, format: 'jpeg', oplImg: "opl_cov.jpg" },
+    _BG:   { title: "Background",      width: 640, height: 480, format: 'jpeg', oplImg: "opl_bg.jpg" },
+    _LGO:  { title: "Logo",       width: 300, height: 110, format: 'jpeg', oplImg: "opl_lgo.jpg" },
+    _ICO:  { title: "Icon",      width: 64,  height: 64,  format: 'jpeg', oplImg: "opl_ico.jpg" },
+    _SCR:  { title: "تظهر عند ضغط زر مثلث <br>Screenshot 1",      width: 256, height: 224, format: 'jpeg', oplImg: "opl_scr1.jpg" },
+    _SCR2: { title: "تظهر عند ضغط زر مثلث <br>Screenshot 2",      width: 256, height: 224, format: 'jpeg', oplImg: "opl_scr2.jpg" }
+};
+
+    function buildUI() {
+        for (const suffix in ART_CONFIG) {
+            const config = ART_CONFIG[suffix];
+            
+            const artBox = document.createElement('div');
+            artBox.className = 'art-box';
+            artBox.id = `box-${suffix}`;
+            
+            artBox.innerHTML = `
+                <img src="${config.oplImg}" alt="موضع الصورة في OPL" class="opl-placement-img">
+                <h3>${config.title}</h3>
+                
+                <div id="upload-ui-${suffix}">
+                    <label class="file-upload-label" for="file-${suffix}">رفع صورة</label>
+                    <input class="file-upload-input" type="file" id="file-${suffix}" accept="image/*">
+                </div>
+
+                <div class="preview-area" id="preview-area-${suffix}">
+                    <button class="clear-btn" onclick="clearSelection('${suffix}')" title="حذف"><i class="fas fa-times"></i></button>
+                    <img class="preview-img" id="preview-img-${suffix}" src="">
+                    <div class="info-box" id="info-${suffix}"></div>
+                </div>
+            `;
+
+            setupDragAndDrop(artBox, suffix);
+            artGrid.appendChild(artBox);
+            document.getElementById(`file-${suffix}`).addEventListener('change', (e) => handleFile(e.target.files[0], suffix));
+        }
+    }
+
+    function setupDragAndDrop(element, suffix) {
+        element.addEventListener('dragover', (e) => { e.preventDefault(); element.classList.add('dragover'); });
+        element.addEventListener('dragleave', () => { element.classList.remove('dragover'); });
+        element.addEventListener('drop', (e) => {
+            e.preventDefault(); element.classList.remove('dragover');
+            if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0], suffix);
+        });
+    }
+
+    function handleFile(file, suffix) {
+        if (!file || !file.type.startsWith('image/')) return;
+        selectedFiles[suffix] = file;
+        
+        document.getElementById(`upload-ui-${suffix}`).style.display = 'none';
+        const previewArea = document.getElementById(`preview-area-${suffix}`);
+        previewArea.style.display = 'flex';
+
+        renderPreview(file, ART_CONFIG[suffix], autoCropToggle.checked, suffix);
+        resetProcessState();
+    }
+
+        function renderPreview(file, config, autoCrop, suffix) {
+        const previewImg = document.getElementById(`preview-img-${suffix}`);
+        const infoDiv = document.getElementById(`info-${suffix}`);
+        const img = new Image();
+        
+        img.onload = () => {
+            const targetRatio = config.width / config.height;
+            const originalRatio = img.width / img.height;
+
+            // إنشاء Canvas لمعاينة النتيجة النهائية الفعلية
+            const canvas = document.createElement('canvas');
+            canvas.width = config.width;
+            canvas.height = config.height;
+            const ctx = canvas.getContext('2d');
+
+            if (autoCrop) {
+                // وضع التفعيل: رسم الصورة مقصوصة
+                let sWidth, sHeight;
+                if (originalRatio > targetRatio) {
+                    sHeight = img.height;
+                    sWidth = img.height * targetRatio;
+                } else {
+                    sWidth = img.width;
+                    sHeight = img.width / targetRatio;
+                }
+                const sx = (img.width - sWidth) / 2;
+                const sy = (img.height - sHeight) / 2;
+                
+                ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, config.width, config.height);
+                infoDiv.style.display = 'none'; 
+                
+            } else {
+                // وضع التعطيل: رسم الصورة مضغوطة بالكامل حسب أبعاد الخانة
+                ctx.drawImage(img, 0, 0, config.width, config.height);
+                
+                infoDiv.style.display = 'block'; 
+
+                if (Math.abs(originalRatio - targetRatio) < 0.05) {
+                    infoDiv.className = 'info-box ideal';
+                    infoDiv.innerHTML = `<i class="fas fa-check-circle"></i> الأبعاد مطابقة ومثالية.`;
+                } else {
+                    let maxCropWidth, maxCropHeight;
+                    if (originalRatio > targetRatio) {
+                        maxCropHeight = img.height;
+                        maxCropWidth = Math.round(img.height * targetRatio);
+                    } else {
+                        maxCropWidth = img.width;
+                        maxCropHeight = Math.round(img.width / targetRatio);
+                    }
+                    
+                    infoDiv.className = 'info-box warn';
+                    infoDiv.innerHTML = `
+                        <i class="fas fa-exclamation-triangle"></i> الأبعاد غير متطابقة وتم ضغط الصورة كما ترى.<br>
+                        لكي لا تتشوه، يجب أن تكون بأبعاد قصوى من صورتك:<br>
+                        العرض: <b>${maxCropWidth}px</b> | الطول: <b>${maxCropHeight}px</b>
+                    `;
+                }
+            }
+
+            // عرض الصورة الناتجة من الـ Canvas في كلا الحالتين
+            previewImg.src = canvas.toDataURL(file.type);
+        };
+        img.src = URL.createObjectURL(file);
+    }
+
+    // تحديث المعاينة والملاحظات بمجرد تشغيل/إطفاء زر القص
+    autoCropToggle.addEventListener('change', () => {
+        const isAutoCrop = autoCropToggle.checked;
+        for (const suffix in selectedFiles) {
+            renderPreview(selectedFiles[suffix], ART_CONFIG[suffix], isAutoCrop, suffix);
+        }
+    });
+
+    window.clearSelection = function(suffix) {
+        delete selectedFiles[suffix];
+        document.getElementById(`upload-ui-${suffix}`).style.display = 'block';
+        document.getElementById(`preview-area-${suffix}`).style.display = 'none';
+        document.getElementById(`file-${suffix}`).value = ""; 
+        resetProcessState();
+    }
+
+    async function startProcessing() {
+        const gameId = gameIdInput.value.trim();
+        if (Object.keys(selectedFiles).length === 0) { alert("اختر صورة واحدة على الأقل!"); return; }
+        if (!gameId) { alert("أدخل ايدي اللعبة أولاً!"); return; }
+
+        processBtn.disabled = true;
+        processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ المعالجة...';
+
+        const zip = new JSZip();
+        const autoCrop = autoCropToggle.checked; 
+
+        for (const suffix in selectedFiles) {
+            const file = selectedFiles[suffix];
+            const config = ART_CONFIG[suffix];
+            const infoDiv = document.getElementById(`info-${suffix}`);
+            
+            try {
+                const resizedBlob = await processImageOnCanvas(file, config, autoCrop);
+                zip.file(`${gameId}${suffix}.${config.format}`, resizedBlob);
+                infoDiv.style.display = 'block';
+                infoDiv.innerHTML = `<i class="fas fa-check"></i> تمت المعالجة بنجاح.`;
+                infoDiv.className = 'info-box ideal';
+            } catch (error) {
+                infoDiv.style.display = 'block';
+                infoDiv.innerHTML = `<i class="fas fa-times"></i> فشل المعالجة.`;
+            }
+        }
+
+        processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> تجميع الملف...';
+        try {
+            finalZipBlob = await zip.generateAsync({ type: "blob", compression: "STORE" });
+            downloadZipBtn.style.display = 'inline-block';
+            processBtn.style.display = 'none';
+        } catch (error) {
+            alert('حدث خطأ أثناء الإنشاء.');
+            resetProcessState();
+        }
+    }
+
+    function processImageOnCanvas(file, config, autoCrop) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = config.width;
+                canvas.height = config.height;
+                const ctx = canvas.getContext('2d');
+
+                if (autoCrop) {
+                    const targetRatio = config.width / config.height;
+                    const originalRatio = img.width / img.height;
+                    let sWidth, sHeight;
+
+                    if (originalRatio > targetRatio) {
+                        sHeight = img.height;
+                        sWidth = img.height * targetRatio;
+                    } else {
+                        sWidth = img.width;
+                        sHeight = img.width / targetRatio;
+                    }
+                    
+                    const sx = (img.width - sWidth) / 2;
+                    const sy = (img.height - sHeight) / 2;
+                    
+                    ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, config.width, config.height);
+                } else {
+                    ctx.drawImage(img, 0, 0, config.width, config.height);
+                }
+
+                canvas.toBlob(blob => {
+                    if (blob) resolve(blob); else reject();
+                }, `image/${config.format}`, config.format === 'jpeg' ? 0.9 : 1.0);
+            };
+            img.onerror = reject;
+            img.src = URL.createObjectURL(file);
+        });
+    }
+
+    function triggerDownload() {
+        if (!finalZipBlob) return;
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(finalZipBlob);
+        link.download = `${gameIdInput.value.trim() || 'ART'}_ART.zip`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function resetProcessState() {
+        processBtn.disabled = Object.keys(selectedFiles).length === 0;
+        processBtn.innerHTML = '<i class="fas fa-cogs"></i> بدء المعالجة وإنشاء ملف ZIP';
+        processBtn.style.display = 'inline-block';
+        downloadZipBtn.style.display = 'none';
+        finalZipBlob = null;
+    }
+
+    document.addEventListener('DOMContentLoaded', buildUI);
+    processBtn.addEventListener('click', startProcessing);
+    downloadZipBtn.addEventListener('click', triggerDownload);
+</script>
+
 </body>
 </html>
