@@ -63,20 +63,32 @@
             display: block; text-align: center; font-weight: 700;
             font-size: 1.2rem; margin-bottom: 10px;
         }
-.input-section input[type="text"] {
-    display: block; 
-    margin: 0 auto 15px auto; 
-    background-color: var(--dark-gray);
-    border: 1px solid #555; 
-    padding: 12px; 
-    border-radius: 8px;
-    color: white; 
-    width: 100%; 
-    max-width: 400px; 
-    text-align: center;
-    font-size: 1.1rem;
-    box-sizing: border-box;
-}
+
+        .id-helper-img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            margin: 10px auto 15px auto;
+            display: block;
+            border: 1px solid #555;
+            box-sizing: border-box;
+        }
+
+        .input-section input[type="text"] {
+            display: block; 
+            margin: 0 auto 15px auto; 
+            background-color: var(--dark-gray);
+            border: 1px solid #555; 
+            padding: 12px; 
+            border-radius: 8px;
+            color: white; 
+            width: 100%; 
+            max-width: 400px; 
+            text-align: center;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+        }
+
         .input-section input[type="text"]:focus {
             outline: none; border-color: var(--accent-blue);
         }
@@ -184,6 +196,7 @@
         <div class="card">
             <div class="input-section">
                 <label for="gameId"><i class="fas fa-id-card"></i> الخطوة الأولى: ضع ايدي اللعبة</label>
+                <img src="id.jpg" alt="دليل استخراج ايدي اللعبة" class="id-helper-img">
                 <input type="text" id="gameId" placeholder="مثال: SLES_556.05">
             </div>
 
@@ -193,7 +206,7 @@
                     <div class="slider round"></div>
                 </label>
                 <div class="toggle-text">
-                    <b>قص الأبعاد تلقائياً <br> لضمان صورة سليمة</b>
+                    <b>قص الأبعاد تلقائياً لضمان صورة سليمة</b>
                     <p class="toggle-desc">✅تفعيل: اقتصاص تلقائي لأفضل نتيجة. <br> ℹ️تعطيل: ضغط الصورة لأبعاد OPL.</p>
                 </div>
             </div>
@@ -202,7 +215,7 @@
         <div class="card">
             <h2><i class="fas fa-images"></i> الخطوة الثانية: <br> اختر الصور أو اسحبها هنا</h2>
             <div class="art-grid" id="artGrid">
-                </div>
+            </div>
             <div class="action-container">
                 <button id="process-btn" class="action-button" disabled><i class="fas fa-cogs"></i> بدء المعالجة وإنشاء ملف ZIP</button>
                 <button id="download-zip-btn" class="action-button"><i class="fas fa-download"></i> تحميل ملف الـ ZIP</button>
@@ -214,7 +227,6 @@
 <footer>
     <p>&copy; <b id="year"></b> محترف PS2. جميع الحقوق محفوظة.</p>
 </footer>
-
 <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -227,15 +239,14 @@
     let selectedFiles = {}; 
     let finalZipBlob = null; 
 
-    // مسارات الصور التوضيحية أصبحت محلية (قم برفعها مع ملف الـ html في نفس المجلد)
     const ART_CONFIG = {
-    _COV:  { title: "Cover",       width: 140, height: 200, format: 'jpeg', oplImg: "opl_cov.jpg" },
-    _BG:   { title: "Background",      width: 640, height: 480, format: 'jpeg', oplImg: "opl_bg.jpg" },
-    _LGO:  { title: "Logo",       width: 300, height: 110, format: 'jpeg', oplImg: "opl_lgo.jpg" },
-    _ICO:  { title: "Icon",      width: 64,  height: 64,  format: 'jpeg', oplImg: "opl_ico.jpg" },
-    _SCR:  { title: "تظهر عند ضغط زر مثلث <br>Screenshot 1",      width: 256, height: 224, format: 'jpeg', oplImg: "opl_scr1.jpg" },
-    _SCR2: { title: "تظهر عند ضغط زر مثلث <br>Screenshot 2",      width: 256, height: 224, format: 'jpeg', oplImg: "opl_scr2.jpg" }
-};
+        _COV:  { title: "Cover",       width: 140, height: 200, format: 'jpeg', oplImg: "opl_cov.jpg" },
+        _BG:   { title: "Background",      width: 640, height: 480, format: 'jpeg', oplImg: "opl_bg.jpg" },
+        _LGO:  { title: "Logo",       width: 300, height: 110, format: 'jpeg', oplImg: "opl_lgo.jpg" },
+        _ICO:  { title: "Icon",      width: 64,  height: 64,  format: 'jpeg', oplImg: "opl_ico.jpg" },
+        _SCR:  { title: "تظهر عند ضغط زر مثلث <br>Screenshot 1",      width: 256, height: 224, format: 'jpeg', oplImg: "opl_scr1.jpg" },
+        _SCR2: { title: "تظهر عند ضغط زر مثلث <br>Screenshot 2",      width: 256, height: 224, format: 'jpeg', oplImg: "opl_scr2.jpg" }
+    };
 
     function buildUI() {
         for (const suffix in ART_CONFIG) {
@@ -288,7 +299,7 @@
         resetProcessState();
     }
 
-        function renderPreview(file, config, autoCrop, suffix) {
+    function renderPreview(file, config, autoCrop, suffix) {
         const previewImg = document.getElementById(`preview-img-${suffix}`);
         const infoDiv = document.getElementById(`info-${suffix}`);
         const img = new Image();
@@ -297,14 +308,12 @@
             const targetRatio = config.width / config.height;
             const originalRatio = img.width / img.height;
 
-            // إنشاء Canvas لمعاينة النتيجة النهائية الفعلية
             const canvas = document.createElement('canvas');
             canvas.width = config.width;
             canvas.height = config.height;
             const ctx = canvas.getContext('2d');
 
             if (autoCrop) {
-                // وضع التفعيل: رسم الصورة مقصوصة
                 let sWidth, sHeight;
                 if (originalRatio > targetRatio) {
                     sHeight = img.height;
@@ -320,7 +329,6 @@
                 infoDiv.style.display = 'none'; 
                 
             } else {
-                // وضع التعطيل: رسم الصورة مضغوطة بالكامل حسب أبعاد الخانة
                 ctx.drawImage(img, 0, 0, config.width, config.height);
                 
                 infoDiv.style.display = 'block'; 
@@ -347,13 +355,11 @@
                 }
             }
 
-            // عرض الصورة الناتجة من الـ Canvas في كلا الحالتين
             previewImg.src = canvas.toDataURL(file.type);
         };
         img.src = URL.createObjectURL(file);
     }
 
-    // تحديث المعاينة والملاحظات بمجرد تشغيل/إطفاء زر القص
     autoCropToggle.addEventListener('change', () => {
         const isAutoCrop = autoCropToggle.checked;
         for (const suffix in selectedFiles) {
@@ -369,7 +375,7 @@
         resetProcessState();
     }
 
-        async function startProcessing() {
+    async function startProcessing() {
         const gameId = gameIdInput.value.trim();
         if (Object.keys(selectedFiles).length === 0) { alert("اختر صورة واحدة على الأقل!"); return; }
         if (!gameId) { alert("أدخل ايدي اللعبة أولاً!"); return; }
@@ -387,7 +393,6 @@
             try {
                 const resizedBlob = await processImageOnCanvas(file, config, autoCrop);
                 zip.file(`${gameId}${suffix}.${config.format}`, resizedBlob);
-                // تم إزالة أكواد رسالة "تمت المعالجة بنجاح" الفردية من هنا
             } catch (error) {
                 console.error(`خطأ في معالجة الصورة: ${suffix}`, error);
             }
